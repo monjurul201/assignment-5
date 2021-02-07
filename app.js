@@ -4,42 +4,47 @@ const SearchBtn = document.getElementById('search-btn');
 const showMeals = document.getElementById('meals');
 const resultHeading = document.getElementById('result-heading');
 const singleMeal = document.getElementById('single-meal');
-const searchResult=document.getElementById('search-result')
+const searchResult = document.getElementById('search-result')
 
-SearchBtn.addEventListener('click', (e) => {
-    searchMeal(e);
+SearchBtn.addEventListener('click', () => {
+    searchMeal();
+    searchInput.value = "";
 })
-function searchMeal(e) {
-    // e.preventDefault();
-    // singleMeal.innerHTML = "";
+function searchMeal() {
     const searchMeals = searchInput.value;
-    // console.log(term);
-    if (searchMeals.trim()) {
-        fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchMeals}`)
-            .then(response => response.json())
-            .then(data => {
 
-                console.log(data)
-                searchResult.innerHTML=`<h2 class="searchResult">search result for : ${searchMeals}</h2>`;
-                if(data.meals===null){
-                    searchResult.innerHTML=`
+    fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchMeals}`)
+        .then(response => response.json())
+        .then(data => {
+
+            console.log(data);
+            searchResult.innerHTML = `<h2 class="searchResult">search result for : ${searchMeals}</h2>`;
+            if (data.meals === null) {
+                searchResult.innerHTML = `
                     <p class="searchResult">There Is No Search For This Meal</p>
                     `;
-                }else{ 
-                    showMeals.innerHTML = data.meals.map((meal) => `
-                    <div class="meal">
-                        <img src="${meal.strMealThumb}" alt="${meal.strMeal}"/>
-                        <div class="meal-info" data-mealID="${meal.idMeal}">
-                            <h4>${meal.strMeal}</h4>
-                        </div>
-                    </div>`
-                    )
-                    .join("");
-                }
-            })
-    } else {
-        alert('please try again');
-    }
+             } else {
+                         showMeals.innerHTML = data.meals.map((meal) => `
+                        <div class="meal">
+                            <div class="show-details">
+                            <img  src="${meal.strMealThumb}" alt="${meal.strMeal}"/>
+                            </div>
+                            <div class="meal-info" data-mealID="${meal.idMeal}">
+                                <h4>${meal.strMeal}</h4>
+                            </div>
+                        </div>`
+                     )
+                     .join("");
+                   }
+          
+
+
+                   const ClickDetails = document.querySelector('.show-details');
+                   ClickDetails.addEventListener('click', function () {
+                       console.log("click maro");
+                   })
+
+        })
 
 }
 
@@ -47,10 +52,6 @@ function searchMeal(e) {
 
 
 
-
-// fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=${searchInput}')
-// .then(response => response.json())
-// .then(data=> console.log(data))
 
 
 
