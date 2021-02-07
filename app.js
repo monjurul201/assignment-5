@@ -10,21 +10,23 @@ SearchBtn.addEventListener('click', () => {
     searchMeal();
     searchInput.value = "";
 })
+
 function searchMeal() {
     const searchMeals = searchInput.value;
+    if (searchMeals.trim()) {
+        fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchMeals}`)
+            .then(response => response.json())
+            .then(data => {
 
-    fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchMeals}`)
-        .then(response => response.json())
-        .then(data => {
-
-            console.log(data);
-            searchResult.innerHTML = `<h2 class="searchResult">search result for : ${searchMeals}</h2>`;
-            if (data.meals === null) {
-                searchResult.innerHTML = `
+                console.log(data);
+                searchResult.innerHTML = `<h2 class="searchResult">search result for : ${searchMeals}</h2>`;
+                if (data.meals === null) {
+                    searchResult.innerHTML = `
                     <p class="searchResult">There Is No Search For This Meal</p>
                     `;
-             } else {
-                         showMeals.innerHTML = data.meals.map((meal) => `
+                } else {
+                    showMeals.innerHTML = data.meals.map((meal) => `
+
                         <div class="meal">
                             <div class="show-details">
                             <img  src="${meal.strMealThumb}" alt="${meal.strMeal}"/>
@@ -32,20 +34,17 @@ function searchMeal() {
                             <div class="meal-info" data-mealID="${meal.idMeal}">
                                 <h4>${meal.strMeal}</h4>
                             </div>
-                        </div>`
-                     )
-                     .join("");
-                   }
-          
-
-
-                   const ClickDetails = document.querySelector('.show-details');
-                   ClickDetails.addEventListener('click', function () {
-                       console.log("click maro");
-                   })
-
-        })
-
+                        </div>
+                        
+                        `
+                    )
+                  .join("");
+                }
+            });
+    }
+     else {
+        alert("Please Write Something input Box.");
+    };
 }
 
 
