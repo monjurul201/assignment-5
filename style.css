@@ -24,3 +24,7 @@ body{
 .show-details:hover{
     border: 3px solid gray;
 }
+.navigation{
+    display: flex;
+    
+}
