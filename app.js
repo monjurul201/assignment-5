@@ -1,13 +1,14 @@
 
 const searchMeals = () => {
     const searchInput = document.getElementById('search-box').value;
+  
     // console.log(searchInput);
     if(searchInput===""){
         alert('At first type value input box then click search button')
     }
     else{
         const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchInput}`
- 
+        searchInput.value="";
         fetch(url)
             .then(res => res.json())
             .then(data => displayMeals(data.meals))
@@ -18,6 +19,7 @@ const searchMeals = () => {
 
 const displayMeals = meals => {
     const mealContainer = document.getElementById('meals');
+    mealContainer.innerHTML='';
     meals.forEach(meal => {
         const singleMeal = document.createElement('div');
         singleMeal.className = 'single-meal';
@@ -62,6 +64,10 @@ const displayMeals = meals => {
                     <li><i class="far fa-square"></i> ${dataMeal.strIngredient4}</li>
                     <li> <i class="far fa-square"></i>${dataMeal.strIngredient5}</li>
                     <li><i class="far fa-square"></i> ${dataMeal.strIngredient6}</li>
+                    <li><i class="far fa-square"></i> ${dataMeal.strIngredient7}</li>
+                    <li><i class="far fa-square"></i> ${dataMeal.strIngredient8}</li>
+                    <li><i class="far fa-square"></i> ${dataMeal.strIngredient9}</li>
+                    <li><i class="far fa-square"></i> ${dataMeal.strIngredient10}</li>
                 </ul>
 
             </div>
