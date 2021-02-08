@@ -1,10 +1,11 @@
 body{
     background-color: #2b2724;
 }
-.searchResult{
-    text-align: center;
-    color: orange;
-    font-size: 40px;
+.navigation-bar a{
+    color:white !important;
+}
+.nav-style{
+    background-color: #2b2724!important;
 }
 .meals{   
     width: 100%;
@@ -14,19 +15,31 @@ body{
     grid-template-columns: repeat(4,1fr);
     grid-gap:20px;
 }
-.meal{
-    border: 2px solid orange;
-    background-color: rgb(250, 235, 235);
-    text-align: center;
-}
-.meal img{
+.show-details img{
     width: 100%;
-    
+}
+.single-meal{
+
+ border: 2px solid orange;
+ background-color: rgb(250, 235, 235);
+ text-align: center;
+   
 }
 .show-details:hover{
-    border: 3px solid gray;
+    border: 2px solid gray;
 }
-.navigation{
-    display: flex;
-    
+.detailsInfo img{
+    width: 300px;
+}
+
+.Ingredient li{
+    margin-right: 5px;
+    list-style: none;
+}
+.Ingredient li i{
+ color: cyan;
+}
+#showMealList{
+margin-left: 20px;
+padding: 30px;
 }
